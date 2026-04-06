@@ -1,0 +1,16 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Deploy: New → Blueprint → connect this repo → set env vars below in the dashboard.
+
+services:
+  - type: web
+    name: food-fusion-api
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Set these in the Render dashboard (do not commit secrets):
+      # MONGODB_URL, JWT_SECRET, FRONTEND_URL, STRIPE_SECRET_KEY, CORS_ORIGINS, etc.

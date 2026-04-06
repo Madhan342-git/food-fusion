@@ -26,10 +26,12 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Enhanced CORS configuration with proper origin handling
-const allowedOrigins = [
+// Enhanced CORS configuration — add comma-separated origins in CORS_ORIGINS (e.g. your Vercel/Netlify URLs)
+const defaultOrigins = [
   'https://foodfusion-frontend.onrender.com',
   'https://foodfusion-admin.onrender.com',
+  'http://localhost:5173',
+  'http://localhost:5174',
   'http://localhost:5175',
   'http://localhost:3000',
   'http://127.0.0.1:5173',
@@ -37,6 +39,11 @@ const allowedOrigins = [
   'http://127.0.0.1:5175',
   'http://127.0.0.1:3000'
 ];
+const extraOrigins = (process.env.CORS_ORIGINS || '')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean);
+const allowedOrigins = [...new Set([...defaultOrigins, ...extraOrigins])];
 
 const corsOptions = {
   origin: function (origin, callback) {

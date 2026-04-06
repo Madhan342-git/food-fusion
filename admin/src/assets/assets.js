@@ -15,4 +15,4 @@ export const assets ={
     logout_icon: '/path/to/logout-icon.svg' // Add your logout icon path
 }
 
-export const url = 'http://localhost:4000'
+export const url = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000'
