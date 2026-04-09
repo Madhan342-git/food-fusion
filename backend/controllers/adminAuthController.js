@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import userModel from '../models/userModel.js';
 import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
+import { DEFAULT_EMAIL_FROM } from '../config/emailDefaults.js';
 
 dotenv.config();
 
@@ -90,7 +91,7 @@ export const sendAdminVerificationEmail = async (req, res) => {
 
     // Send verification email
     await transporter.sendMail({
-      from: process.env.SMTP_EMAIL,
+      from: process.env.SMTP_FROM || process.env.SMTP_EMAIL || DEFAULT_EMAIL_FROM,
       to: email,
       subject: "Admin Account Verification",
       html: `

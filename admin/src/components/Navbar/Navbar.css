@@ -4,9 +4,27 @@
     align-items: center;
     padding: 8px 4%;
 }
-.navbar .logo {
-    width: max(7%,40px);
+.navbar-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    line-height: 1.1;
+}
 
+.navbar-brand-title {
+    color: #FF4C24;
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.2vw, 1.85rem);
+    letter-spacing: 0.04em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.navbar-brand-subtitle {
+    color: #555;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 4px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .navbar .profile{
     width: 40px;

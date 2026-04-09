@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import userModel from '../models/userModel.js';
+import { DEFAULT_EMAIL_FROM } from '../config/emailDefaults.js';
 
 // Configure email transporter
 const transporter = nodemailer.createTransport({
@@ -364,7 +365,7 @@ export const resetAdminPassword = async (req, res) => {
 
     // Send reset email
     await transporter.sendMail({
-      from: process.env.SMTP_EMAIL,
+      from: process.env.SMTP_FROM || process.env.SMTP_EMAIL || DEFAULT_EMAIL_FROM,
       to: admin.email,
       subject: 'Admin Password Reset',
       html: `

@@ -21,7 +21,10 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
-      <img src={assets.logo} alt="logo" className='logo' />
+      <div className="navbar-brand" aria-label="Food Fusion Admin Panel">
+        <span className="navbar-brand-title">FOOD FUSION</span>
+        <span className="navbar-brand-subtitle">Admin Panel</span>
+      </div>
       <div className="nav-right">
         <button onClick={handleLogout} className="logout-btn">
           <img src={assets.logout_icon} alt="logout" />

@@ -4,20 +4,21 @@ import nodemailer from "nodemailer";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../models/userModel.js";
+import { DEFAULT_SENDER_EMAIL, DEFAULT_EMAIL_FROM } from "../config/emailDefaults.js";
 
 dotenv.config();
 
 const router = express.Router();
 const otpStorage = {}; // Temporary storage for OTPs
 
-// Email transporter configuration
+// Email transporter — set EMAIL_USER and EMAIL_PASSWORD in .env (e.g. Gmail app password)
 const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST || "smtp.gmail.com",
     port: process.env.EMAIL_PORT || 587,
     secure: false,
     auth: {
-        user: process.env.EMAIL_USER || "amarnadhchow@gmail.com",
-        pass: process.env.EMAIL_PASSWORD || "gawcvlvnhhirnhkm",
+        user: process.env.EMAIL_USER || DEFAULT_SENDER_EMAIL,
+        pass: process.env.EMAIL_PASSWORD,
     },
 });
 
@@ -59,7 +60,7 @@ router.post("/send-otp", async (req, res) => {
 
         // Send OTP via email
         await transporter.sendMail({
-            from: process.env.EMAIL_FROM || process.env.EMAIL_USER || '"Del Exscel" <amarnadhchow@gmail.com>',
+            from: process.env.EMAIL_FROM || process.env.EMAIL_USER || DEFAULT_EMAIL_FROM,
             to: email,
             subject: "Your OTP Code",
             text: `Your OTP is: ${otp}. It will expire in 5 minutes.`,
